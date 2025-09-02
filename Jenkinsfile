@@ -1,29 +1,39 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
+        stage("Build") {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/vuongnguyen18/jenkins-devops-demo.git'
+                echo "Using Maven to compile and package the code"
             }
         }
-
-        stage('Build') {
+        stage("Unit and Integration Tests") {
             steps {
-                echo 'Building the project...'
+                echo "Using JUnit and Mockito to run unit and integration tests"
             }
         }
-
-        stage('Test') {
+        stage("Code Analysis") {
             steps {
-                echo 'Running tests...'
+                echo "Using SonarQube to analyze code quality and standards"
             }
         }
-
-        stage('Deploy') {
+        stage("Security Scan") {
             steps {
-                echo 'Deploying application...'
+                echo "Using OWASP Dependency-Check to scan for vulnerabilities"
+            }
+        }
+        stage("Deploy to Staging") {
+            steps {
+                echo "Using Ansible to deploy the application to a staging server"
+            }
+        }
+        stage("Integration Tests on Staging") {
+            steps {
+                echo "Using Selenium to run integration tests on the staging environment"
+            }
+        }
+        stage("Deploy to Production") {
+            steps {
+                echo "Using AWS CodeDeploy to deploy the application to production"
             }
         }
     }
